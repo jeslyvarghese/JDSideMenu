@@ -37,6 +37,7 @@ const CGFloat JDSideMenuDefaultCloseAnimationTime = 0.4;
         _menuWidth = JDSideMenuDefaultMenuWidth;
         _tapGestureEnabled = YES;
         _panGestureEnabled = YES;
+        _contentInteractionDisabledInMenu = NO;
     }
     return self;
 }
@@ -180,6 +181,7 @@ const CGFloat JDSideMenuDefaultCloseAnimationTime = 0.4;
 
 - (void)showMenuAnimated:(BOOL)animated;
 {
+    self.contentController.view.userInteractionEnabled = !self.isContnetInteractionDisabledInMenu;
     [self showMenuAnimated:animated duration:JDSideMenuDefaultOpenAnimationTime
            initialVelocity:1.0];
 }
@@ -188,6 +190,8 @@ const CGFloat JDSideMenuDefaultCloseAnimationTime = 0.4;
          initialVelocity:(CGFloat)velocity;
 {
     // add menu view
+    self.contentController.view.userInteractionEnabled = !self.isContnetInteractionDisabledInMenu;
+
     [self addMenuControllerView];
     
     // animate
@@ -206,6 +210,7 @@ const CGFloat JDSideMenuDefaultCloseAnimationTime = 0.4;
         blockSelf.containerView.transform = CGAffineTransformIdentity;
         [self statusBarView].transform = blockSelf.containerView.transform;
     } completion:^(BOOL finished) {
+        blockSelf.contentController.view.userInteractionEnabled = YES;
         [blockSelf.menuController.view removeFromSuperview];
     }];
 }

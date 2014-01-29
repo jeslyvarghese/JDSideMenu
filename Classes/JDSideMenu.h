@@ -16,7 +16,7 @@
 @property (nonatomic, assign) CGFloat menuWidth;
 @property (nonatomic, assign) BOOL tapGestureEnabled;
 @property (nonatomic, assign) BOOL panGestureEnabled;
-
+@property (nonatomic, assign, getter = isContnetInteractionDisabledInMenu) BOOL contentInteractionDisabledInMenu;
 - (id)initWithContentController:(UIViewController*)contentController
                  menuController:(UIViewController*)menuController;
 
